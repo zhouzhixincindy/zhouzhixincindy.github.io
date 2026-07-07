@@ -1,0 +1,18 @@
+# keep local, never publish
+about.html
+
+# system / tool junk
+.DS_Store
+.Rhistory
+.claude/
+
+# unused / unpublished images (privacy: keep local only)
+images/lemberg-art-*.jpg
+images/lemberg-towels.jpg
+images/lemberg-mask.jpg
+images/lemberg-dance.jpg
+images/lemberg-painting.jpg
+images/lemberg-heart.jpg
+images/autism-wall.jpg
+images/autism-booth.jpg
+images/autism-booth-strip.jpg

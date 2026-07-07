@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Developmental Psychology &middot; Zhixin Zhou</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #FAFAFA;
+  color: #1A2332;
+  font-family: 'Lora', Georgia, serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Top bar ── */
+.topbar-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 4.5rem;
+}
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid rgba(26, 35, 50, 0.1);
+}
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+.topbar-left a {
+  font-style: italic;
+  font-size: 13px;
+  color: #525B6B;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.topbar-left a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+/* ── Layout ── */
+.container { max-width: 980px; margin: 0 auto; padding: 3rem 4.5rem; }
+
+.back-link {
+  font-size: 13px;
+  font-style: italic;
+  color: #6E737D;
+  text-decoration: none;
+  display: block;
+  margin-bottom: 2rem;
+}
+
+.page-title {
+  font-weight: 600;
+  font-size: 42px;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  color: #1A2332;
+  margin-bottom: 1.75rem;
+}
+
+.page-subtitle {
+  font-style: italic;
+  font-size: 14px;
+  color: #1A2332;
+  margin-bottom: 1.75rem;
+}
+
+.page-intro {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #1A2332;
+  margin: 0 0 72px 0;
+  max-width: 820px;
+}
+
+/* ── Research thread (spine + cases) ── */
+.thread {
+  position: relative;
+  padding-left: 44px;
+  margin-bottom: 72px;
+}
+.thread::before {
+  content: '';
+  position: absolute;
+  left: 10px;
+  top: 8px;
+  bottom: 8px;
+  width: 1px;
+  background: #C9A96E;
+  opacity: 0.55;
+}
+
+.inst-label {
+  position: relative;
+  margin: 0 0 24px;
+}
+.inst-label::before {
+  content: '';
+  position: absolute;
+  left: -39px;
+  top: 12px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: #C9A96E;
+}
+.inst-name {
+  font-size: 30px;
+  font-style: italic;
+  color: #1A2332;
+  line-height: 1.15;
+}
+.inst-sub {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  color: #9CA0A8;
+  text-transform: uppercase;
+  margin-top: 6px;
+}
+
+.case {
+  position: relative;
+  background: #FFFFFF;
+  border: 1px solid #E8E5DD;
+  border-radius: 16px;
+  padding: 42px 48px;
+  margin-bottom: 48px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+.case::before {
+  content: '';
+  position: absolute;
+  left: -37.5px;
+  top: 56px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 1.5px solid #C9A96E;
+}
+
+.case-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  margin-bottom: 22px;
+}
+.case-eyebrow {
+  font-size: 12.5px;
+  letter-spacing: 0.08em;
+  color: #6E737D;
+  text-transform: uppercase;
+}
+.case-chip {
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #C9A96E;
+  border: 1px solid #C9A96E;
+  border-radius: 999px;
+  padding: 6px 16px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.case h2 {
+  font-size: 27px;
+  font-weight: 600;
+  color: #1A2332;
+  margin: 0 0 6px;
+  line-height: 1.25;
+}
+.case-sub {
+  font-size: 16px;
+  font-style: italic;
+  color: #6E737D;
+  margin-bottom: 30px;
+  line-height: 1.4;
+}
+
+.case-cols {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 32px;
+  align-items: stretch;
+  margin-bottom: 30px;
+}
+.case-cols .method-box { height: 100%; }
+#ripple-card .case-cols { grid-template-columns: 1fr 1.1fr; }
+
+.modal-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: #9CA0A8;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-bottom: 14px;
+}
+
+.lab-contrib {
+  font-size: 15px;
+  font-weight: 500;
+  color: #4F5B8B;
+  line-height: 1.55;
+}
+
+.method-box {
+  background: #FAFAFA;
+  border: 0.5px solid #E8E5DD;
+  border-radius: 8px;
+  padding: 14px 18px;
+}
+.method-box .modal-eyebrow { margin-bottom: 8px; }
+.method-text { font-size: 14px; line-height: 1.55; color: #1A2332; }
+.method-list { list-style: none; margin: 8px 0 0; padding: 0; }
+.method-list li {
+  position: relative;
+  padding-left: 18px;
+  margin-bottom: 6px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.method-list li:last-child { margin-bottom: 0; }
+.method-list li::before { content: "\2022"; position: absolute; left: 2px; color: #C9A96E; }
+
+.case-diagram { display: flex; flex-direction: column; align-items: center; margin: 0 0 32px; }
+.case-diagram svg { max-width: 100%; height: auto; }
+.diagram-caption { font-style: italic; font-size: 11px; color: #9CA0A8; margin-top: 8px; text-align: center; }
+
+.finding-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px 24px;
+}
+.finding { border-left: 2px solid #C9A96E; padding: 2px 0 2px 18px; }
+.finding-title { font-weight: 600; font-size: 16px; color: #1A2332; margin: 0 0 4px; }
+.finding-text { font-size: 14px; line-height: 1.55; color: #6E737D; margin: 0; }
+
+.shift-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 30px;
+}
+.shift-col-label {
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  color: #C9A96E;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+.shift-grid ul { font-size: 14px; line-height: 1.6; color: #1A2332; padding-left: 18px; margin: 0; }
+
+.pill-row { display: flex; flex-wrap: wrap; gap: 10px; }
+.pill {
+  border: 1px solid #C9A96E;
+  border-radius: 999px;
+  padding: 8px 18px;
+  font-size: 13px;
+  color: #1A2332;
+  background: #FFFFFF;
+}
+
+.pdf-frame {
+  width: 100%;
+  height: 520px;
+  border: 1px solid #E8E5DD;
+  border-radius: 4px;
+  background: #FAFAFA;
+  display: block;
+}
+.pdf-button {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 12px 28px;
+  border-radius: 999px;
+  border: 1.5px solid #1A2332;
+  background: #FFFFFF;
+  color: #1A2332;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+/* ── Methods bridge ── */
+.methods-bridge { margin: 0 0 80px; }
+.methods-bridge h2 { font-size: 28px; font-weight: 600; color: #1A2332; margin-bottom: 28px; }
+.methods-bridge p { font-size: 18px; line-height: 1.65; font-weight: 500; color: #1A2332; }
+.methods-bridge .next-link {
+  display: inline-block;
+  margin-top: 20px;
+  font-size: 14px;
+  font-style: italic;
+  color: #C9A96E;
+  text-decoration: none;
+  border-bottom: 0.5px solid #C9A96E;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .topbar-wrap { padding: 0 1.5rem; }
+  .container { padding: 2rem 1.5rem; }
+  .thread { padding-left: 0; }
+  .thread::before { display: none; }
+  .inst-label::before, .case::before { display: none; }
+  .case { padding: 28px 22px; }
+  .case-cols { grid-template-columns: 1fr; gap: 24px; }
+  .finding-grid, .shift-grid { grid-template-columns: 1fr; }
+  .pdf-frame { height: 420px; }
+}
+
+@media (max-width: 600px) {
+  .page-h1 { font-size: 28px !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── Top bar ── -->
+<div class="topbar-wrap">
+  <header class="topbar">
+    <div class="topbar-left">
+      <a href="mailto:zhouzhixin.cindy@gmail.com">zhouzhixin.cindy@gmail.com</a>
+      <a href="https://www.linkedin.com/in/zhou-zhixin" target="_blank" rel="noopener">
+        <svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="#525B6B" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="1.5" y="1.5" width="17" height="17" rx="3"/>
+          <line x1="6.5" y1="8.5" x2="6.5" y2="14.5"/>
+          <line x1="6.5" y1="5.5" x2="6.5" y2="6.2"/>
+          <path d="M10 8.5 v6 M10 11 c0-2 6-2.5 6 0 v3"/>
+        </svg>
+        LinkedIn
+      </a>
+      <a href="https://scholar.google.com" target="_blank" rel="noopener">Scholar</a>
+      <a href="cv.pdf" target="_blank">CV</a>
+    </div>
+  </header>
+</div>
+
+<!-- ── Main content ── -->
+<main class="container">
+
+  <a class="back-link" href="index.html">&larr; back</a>
+
+  <h1 class="page-title">Developmental research across contexts and relations.</h1>
+
+  <p class="page-intro">
+    Before children&rsquo;s interactions with AI, I trained as a developmental psychologist. My work across three Penn labs and graduate coursework spans cross-cultural measurement, qualitative/quantitative coding, attachment and personality theory, and research translation. These projects taught me how to study development where Western frameworks don&rsquo;t always apply, and how to communicate research to audiences beyond academia.
+  </p>
+
+  <!-- ══════════ Research at Penn Labs ══════════ -->
+  <div class="thread">
+
+    <div class="inst-label">
+      <div class="inst-name">Research at Penn Labs</div>
+      <div class="inst-sub">2024 to Present</div>
+    </div>
+
+    <!-- Lab 01: RIPPLE Lab -->
+    <section class="case" id="ripple-card">
+      <div class="case-head">
+        <div class="case-eyebrow">Penn &middot; Dr. Sharon Wolf</div>
+        <div class="case-chip">Lab &middot; 01</div>
+      </div>
+      <h2>RIPPLE Lab</h2>
+      <div class="case-sub">Adolescent mental health in Ghana</div>
+
+      <div class="case-cols">
+        <div>
+          <div class="modal-eyebrow">What I Contributed</div>
+          <div class="lab-contrib">
+            Worked with survey data from 2,476 Ghanaian adolescents and parents, the research applies statistical models to create measurement for the Ghana context. Informs a paper in preparation.
+          </div>
+        </div>
+        <div class="method-box">
+          <div class="modal-eyebrow">Method</div>
+          <div class="method-text">
+            Large-scale psychometrics on the full dataset:
+            <ul class="method-list">
+              <li>split-half exploratory and confirmatory factor analysis to adapt the parenting measure</li>
+              <li>latent profile analysis to identify distinct parenting profiles</li>
+              <li>descriptive and demographic analyses linking those profiles to family context</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="case-diagram">
+        <svg viewBox="-10 0 670 270" xmlns="http://www.w3.org/2000/svg" style="width: 620px;" font-family="Lora, Georgia, serif" aria-label="Four parenting profiles among 2,374 Ghanaian parents: a large average majority, an engaged-but-inconsistent group where warmth and inconsistency co-exist, a group defined by time with the child, and a disengaged group.">
+          <text x="20" y="26" font-size="11" letter-spacing="1.2" fill="#C9A96E">2,374 PARENTS &#183; FOUR KINDS OF PARENTING</text>
+
+          <text x="285" y="52" text-anchor="middle" font-size="12.5" font-style="italic" fill="#C9A96E">the surprise: warmth and inconsistency co-exist</text>
+          <line x1="285" y1="58" x2="285" y2="72" stroke="#C9A96E" stroke-width="1"/>
+
+          <!-- the average majority -->
+          <ellipse cx="115" cy="112" rx="88" ry="46" fill="#FFFFFF" stroke="#9CA0A8" stroke-width="1" stroke-dasharray="4 4"/>
+          <g fill="#9CA0A8">
+            <circle cx="70" cy="105" r="3.5"/><circle cx="92" cy="92" r="3.5"/><circle cx="115" cy="108" r="3.5"/>
+            <circle cx="138" cy="95" r="3.5"/><circle cx="160" cy="112" r="3.5"/><circle cx="85" cy="125" r="3.5"/>
+            <circle cx="112" cy="130" r="3.5"/><circle cx="140" cy="124" r="3.5"/><circle cx="60" cy="120" r="3.5"/>
+            <circle cx="128" cy="82" r="3.5"/><circle cx="155" cy="130" r="3.5"/><circle cx="98" cy="112" r="3.5"/>
+          </g>
+          <text x="115" y="180" text-anchor="middle" font-size="12.5" font-weight="600" fill="#1A2332">the average majority</text>
+          <text x="115" y="197" text-anchor="middle" font-size="11.5" font-style="italic" fill="#6E737D">about two in three parents</text>
+
+          <!-- engaged but inconsistent -->
+          <ellipse cx="285" cy="110" rx="60" ry="38" fill="#FFFFFF" stroke="#C9A96E" stroke-width="1.6"/>
+          <g fill="#C9A96E">
+            <circle cx="265" cy="100" r="3.5"/><circle cx="290" cy="92" r="3.5"/><circle cx="305" cy="112" r="3.5"/>
+            <circle cx="272" cy="122" r="3.5"/><circle cx="293" cy="118" r="3.5"/>
+          </g>
+          <text x="285" y="180" text-anchor="middle" font-size="12.5" font-weight="600" fill="#1A2332">engaged but inconsistent</text>
+          <text x="285" y="197" text-anchor="middle" font-size="11.5" font-style="italic" fill="#6E737D">warm, yet unpredictable</text>
+
+          <!-- all-in on time -->
+          <ellipse cx="435" cy="112" rx="48" ry="32" fill="#FFFFFF" stroke="#9CA0A8" stroke-width="1" stroke-dasharray="4 4"/>
+          <g fill="#9CA0A8">
+            <circle cx="420" cy="105" r="3.5"/><circle cx="443" cy="98" r="3.5"/><circle cx="448" cy="120" r="3.5"/><circle cx="428" cy="122" r="3.5"/>
+          </g>
+          <text x="435" y="180" text-anchor="middle" font-size="12.5" font-weight="600" fill="#1A2332">all-in on time</text>
+          <text x="435" y="197" text-anchor="middle" font-size="11.5" font-style="italic" fill="#6E737D">hours with the child</text>
+
+          <!-- disengaged -->
+          <ellipse cx="565" cy="112" rx="45" ry="30" fill="#FFFFFF" stroke="#9CA0A8" stroke-width="1" stroke-dasharray="4 4"/>
+          <g fill="#9CA0A8">
+            <circle cx="552" cy="106" r="3.5"/><circle cx="572" cy="100" r="3.5"/><circle cx="570" cy="120" r="3.5"/>
+          </g>
+          <text x="570" y="180" text-anchor="middle" font-size="12.5" font-weight="600" fill="#1A2332">disengaged</text>
+          <text x="570" y="197" text-anchor="middle" font-size="11.5" font-style="italic" fill="#6E737D">low warmth, low closeness</text>
+
+          <text x="325" y="245" text-anchor="middle" font-size="13.5" font-style="italic" fill="#6E737D">parenting in Ghana forms its own profiles, not textbook styles, and each may mean a different family life</text>
+        </svg>
+      </div>
+
+      <div class="modal-eyebrow">What Surfaced</div>
+      <div class="finding-grid">
+        <div class="finding">
+          <p class="finding-title">Western tools do not always travel</p>
+          <p class="finding-text">A US parenting questionnaire lost its structure when used with Ghanaian teenagers, and needed item-level adaptation.</p>
+        </div>
+        <div class="finding">
+          <p class="finding-title">Meaning shifts across cultures</p>
+          <p class="finding-text">What "warmth" or "discipline" looks like depends on context. Even tested questionnaires do not automatically carry over.</p>
+        </div>
+        <div class="finding">
+          <p class="finding-title">Poverty shapes parenting</p>
+          <p class="finding-text">Food insecurity, economic stress, and caregiver distress shape parenting in ways measurement tools have to account for.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lab 02: Dr. Chen's Lab -->
+    <section class="case" id="chen-card">
+      <div class="case-head">
+        <div class="case-eyebrow">Penn &middot; Dr. Xinyin Chen</div>
+        <div class="case-chip">Lab &middot; 02</div>
+      </div>
+      <h2>Dr. Chen&rsquo;s Lab</h2>
+      <div class="case-sub">Free-play behavioral coding</div>
+
+      <div class="case-cols">
+        <div>
+          <div class="modal-eyebrow">What I Contributed</div>
+          <div class="lab-contrib">
+            Watched hundreds of hours of video of Chinese 4-year-olds playing in groups, and translated what they did into structured data. Refined the coding system as new patterns showed up, and cross-checked with other coders to make sure we were seeing the same things.
+          </div>
+        </div>
+        <div class="method-box">
+          <div class="modal-eyebrow">Method</div>
+          <div class="method-text">Watched 25-minute play sessions with groups of four children and scored more than 20 behaviors on a 0-2 scale, from individual emotions to group dynamics.</div>
+        </div>
+      </div>
+
+      <div class="case-diagram">
+        <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg" style="width: 360px;" aria-label="Two levels of the coding scheme: individual and group">
+          <circle cx="180" cy="100" r="88" fill="none" stroke="#C9A96E" stroke-width="0.8" opacity="0.6"/>
+          <text x="180" y="22" text-anchor="middle" font-family="Lora, Georgia, serif" font-size="10" letter-spacing="1.5" fill="#9CA0A8">GROUP</text>
+          <circle cx="180" cy="100" r="46" fill="#FAFAFA" stroke="#C9A96E" stroke-width="0.8"/>
+          <text x="180" y="65" text-anchor="middle" font-family="Lora, Georgia, serif" font-size="10" letter-spacing="1.5" fill="#9CA0A8">INDIVIDUAL</text>
+          <text x="180" y="95" text-anchor="middle" font-family="Lora, Georgia, serif" font-size="11" fill="#1A2332" font-style="italic">affect, shyness,</text>
+          <text x="180" y="110" text-anchor="middle" font-family="Lora, Georgia, serif" font-size="11" fill="#1A2332" font-style="italic">task focus&#8230;</text>
+          <text x="180" y="175" text-anchor="middle" font-family="Lora, Georgia, serif" font-size="11" fill="#1A2332" font-style="italic">interactiveness, cohesiveness, hierarchy&#8230;</text>
+        </svg>
+        <p class="diagram-caption">two levels of the coding scheme, 20+ behaviors in total</p>
+      </div>
+
+      <div class="modal-eyebrow">What Surfaced</div>
+      <div class="finding-grid">
+        <div class="finding">
+          <p class="finding-title">Gendered behavior patterns</p>
+          <p class="finding-text">Girls more often in quiet, cooperative play; boys more often in rough-and-tumble.</p>
+        </div>
+        <div class="finding">
+          <p class="finding-title">Small societies formed fast</p>
+          <p class="finding-text">Leaders, rule-makers, and followers emerged within minutes. Sometimes, so did exclusion.</p>
+        </div>
+        <div class="finding">
+          <p class="finding-title">No two four-year-olds are alike</p>
+          <p class="finding-text">Even within one group, kids varied widely in shyness, focus, and how often they jumped in.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lab 03: Nakkula Consortium -->
+    <section class="case">
+      <div class="case-head">
+        <div class="case-eyebrow">Penn &middot; Dr. Michael Nakkula</div>
+        <div class="case-chip">Lab &middot; 03</div>
+      </div>
+      <h2>Consortium for Mental Health and Optimal Development</h2>
+      <div class="case-sub">Qualitative Coding for School District Partnerships</div>
+
+      <div class="case-cols">
+        <div>
+          <div class="modal-eyebrow">What I Contributed</div>
+          <div class="lab-contrib">
+            Translated a year of reflective memos from district staff into a longitudinal report that Unionville (a school district from Philadelphia) leadership used to inform their strategic plans for the following school year.
+          </div>
+        </div>
+        <div class="method-box">
+          <div class="modal-eyebrow">Method</div>
+          <div class="method-text">All year long, district counselors, teachers, and administrators wrote short reflective memos every two months. I read and coded every one, watched how the themes changed from fall to spring, and turned the whole year into one report the district could act on.</div>
+        </div>
+      </div>
+
+      <div class="case-diagram">
+        <svg viewBox="0 0 620 240" xmlns="http://www.w3.org/2000/svg" style="width: 580px;" font-family="Lora, Georgia, serif" aria-label="Across the school year, district priorities shifted from building systems in fall (MTSS, program visibility, collaboration) to caring for people in spring (staff wellness, racial identity exploration, role-defining frameworks).">
+          <!-- FALL -->
+          <text x="140" y="44" text-anchor="middle" font-size="13.5" letter-spacing="2" fill="#C9A96E">FALL</text>
+          <text x="140" y="63" text-anchor="middle" font-size="11.5" font-style="italic" fill="#9CA0A8">Sep&#8211;Dec &#183; building systems</text>
+          <rect x="48" y="78" width="184" height="28" rx="14" fill="#FFFFFF" stroke="#E8E5DD"/>
+          <text x="140" y="96" text-anchor="middle" font-size="12.5" fill="#1A2332">MTSS development</text>
+          <rect x="48" y="115" width="184" height="28" rx="14" fill="#FFFFFF" stroke="#E8E5DD"/>
+          <text x="140" y="133" text-anchor="middle" font-size="12.5" fill="#1A2332">program visibility</text>
+          <rect x="48" y="152" width="184" height="28" rx="14" fill="#FFFFFF" stroke="#E8E5DD"/>
+          <text x="140" y="170" text-anchor="middle" font-size="12.5" fill="#1A2332">team-based collaboration</text>
+          <!-- arrow -->
+          <path d="M 250 128 C 288 128, 335 128, 366 128" fill="none" stroke="#C9A96E" stroke-width="1.6"/>
+          <polygon points="374,128 364,122.5 364,133.5" fill="#C9A96E"/>
+          <text x="310" y="110" text-anchor="middle" font-size="12" font-style="italic" fill="#C9A96E">the year&#8217;s quiet shift</text>
+          <!-- SPRING -->
+          <text x="480" y="44" text-anchor="middle" font-size="13.5" letter-spacing="2" fill="#C9A96E">SPRING</text>
+          <text x="480" y="63" text-anchor="middle" font-size="11.5" font-style="italic" fill="#9CA0A8">Jan&#8211;Apr &#183; caring for people</text>
+          <rect x="388" y="78" width="184" height="28" rx="14" fill="#FFFFFF" stroke="#C9A96E" stroke-width="1.2"/>
+          <text x="480" y="96" text-anchor="middle" font-size="12.5" fill="#1A2332">staff wellness</text>
+          <rect x="388" y="115" width="184" height="28" rx="14" fill="#FFFFFF" stroke="#C9A96E" stroke-width="1.2"/>
+          <text x="480" y="133" text-anchor="middle" font-size="12.5" fill="#1A2332">racial identity exploration</text>
+          <rect x="388" y="152" width="184" height="28" rx="14" fill="#FFFFFF" stroke="#C9A96E" stroke-width="1.2"/>
+          <text x="480" y="170" text-anchor="middle" font-size="12.5" fill="#1A2332">role-defining frameworks</text>
+          <text x="310" y="220" text-anchor="middle" font-size="13.5" font-style="italic" fill="#6E737D">as the systems settled, attention turned to the people running them</text>
+        </svg>
+      </div>
+
+      <div class="modal-eyebrow">What Surfaced</div>
+      <p style="font-size: 15px; line-height: 1.7; color: #1A2332; margin: 0 0 16px 0;">The analysis traced how district priorities shifted across the year, surfacing three patterns that needed attention.</p>
+      <div class="pill-row">
+        <span class="pill">Role ambiguity</span>
+        <span class="pill">Demand-capacity gaps</span>
+        <span class="pill">Uneven data access</span>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ══════════ Selected Projects ══════════ -->
+  <div class="thread">
+
+    <div class="inst-label">
+      <div class="inst-name">Selected Projects</div>
+      <div class="inst-sub">Research Synthesis &amp; Translation</div>
+    </div>
+
+    <!-- Project 01: Music Interventions -->
+    <section class="case">
+      <div class="case-head">
+        <div class="case-eyebrow">Research Translation</div>
+        <div class="case-chip">Project &middot; 01</div>
+      </div>
+      <h2>Promoting Music Interventions</h2>
+      <div class="case-sub">Across Life Stages</div>
+
+      <div class="modal-eyebrow">What We Argued</div>
+      <div class="lab-contrib" style="margin-bottom: 30px;">
+        Music interventions have demonstrable benefits across developmental stages, but their integration into education and healthcare requires targeted advocacy across stakeholder groups, particularly given the documented decline in K-12 music funding.
+      </div>
+
+      <div class="modal-eyebrow">Infographic</div>
+      <iframe class="pdf-frame" loading="lazy" src="files/music-interventions-infographic.pdf#view=Fit&zoom=50&pagemode=none&toolbar=1&navpanes=0"
+              title="Team Tangerine Music Interventions Infographic"></iframe>
+      <a class="pdf-button" href="files/music-interventions-infographic.pdf" target="_blank" rel="noopener noreferrer">Open in new tab &#8599;</a>
+    </section>
+
+    <!-- Project 02: What I Say, and What I Hold Back -->
+    <section class="case">
+      <div class="case-head">
+        <div class="case-eyebrow">Qualitative Analysis</div>
+        <div class="case-chip">Project &middot; 02</div>
+      </div>
+      <h2>What I Say, and What I Hold Back</h2>
+      <div class="case-sub">A qualitative study of conflict with parents and friends</div>
+
+      <div class="modal-eyebrow">What We Argued</div>
+      <div class="lab-contrib" style="margin-bottom: 30px;">
+        The same person handles conflict very differently depending on who they are in conflict with. With parents, hierarchy, filial respect, and cultural expectation shape what gets expressed and what gets held back. With friends, the playing field is more equal, so disagreement can be more direct. For Chinese international students living between two cultural worlds, conflict becomes a quiet place where identity is negotiated.
+      </div>
+
+      <div class="modal-eyebrow">Full Paper</div>
+      <iframe class="pdf-frame" loading="lazy" src="files/conflict-qualitative-study.pdf#view=Fit&zoom=50&pagemode=none&toolbar=1&navpanes=0"
+              title="What I Say, and What I Hold Back: full paper"></iframe>
+      <a class="pdf-button" href="files/conflict-qualitative-study.pdf" target="_blank" rel="noopener noreferrer">Open in new tab &#8599;</a>
+    </section>
+
+    <!-- Project 03: Echoes of Early Bonds -->
+    <section class="case">
+      <div class="case-head">
+        <div class="case-eyebrow">Theoretical Synthesis</div>
+        <div class="case-chip">Project &middot; 03</div>
+      </div>
+      <h2>Echoes of Early Bonds</h2>
+      <div class="case-sub">The Role of Parental Attachment in Adolescent Friendships</div>
+
+      <div class="modal-eyebrow">What We Argued</div>
+      <div class="lab-contrib" style="margin-bottom: 30px;">
+        Adolescent friendship quality is understood as a downstream effect of early attachment, mediated by personality traits like neuroticism and extraversion, and shaped by cultural and gendered expectations of what intimacy means.
+      </div>
+
+      <div class="modal-eyebrow">Full Presentation</div>
+      <iframe class="pdf-frame" loading="lazy" src="files/echoes-of-early-bonds.pdf#view=FitH&pagemode=none&toolbar=1&navpanes=0"
+              title="Echoes of Early Bonds presentation"></iframe>
+      <a class="pdf-button" href="files/echoes-of-early-bonds.pdf" target="_blank" rel="noopener noreferrer">Open in new tab &#8599;</a>
+    </section>
+
+  </div>
+
+  <!-- ── Methods I Bring Forward ── -->
+  <div class="methods-bridge">
+    <h2>Methods I Bring Forward</h2>
+    <p>
+      Across labs and coursework, I&rsquo;ve trained in factor analysis and measurement adaptation, cross-cultural qualitative coding, attachment and personality theory, and research translation for diverse audiences. These methods now shape how I approach children&rsquo;s social engagement with AI.
+    </p>
+    <a class="next-link" href="childrenAI.html">See where these methods lead &rarr; Children &amp; AI</a>
+  </div>
+
+  <!-- ── Closing ── -->
+  <div style="text-align: center; padding-top: 40px; padding-bottom: 60px;">
+    <div style="display: flex; gap: 14px; align-items: center; justify-content: center; flex-wrap: wrap;">
+      <a href="mailto:zhouzhixin.cindy@gmail.com" style="background: #1A2332; color: #FFFFFF; padding: 13px 30px; border-radius: 999px; font-size: 14px; font-weight: 500; text-decoration: none;">Get in touch</a>
+      <a href="index.html" style="border: 1.5px solid #1A2332; color: #1A2332; padding: 13px 30px; border-radius: 999px; font-size: 14px; font-weight: 500; text-decoration: none; background: #FFFFFF;">&larr; back home</a>
+    </div>
+  </div>
+
+</main>
+
+</body>
+</html>
