@@ -709,11 +709,77 @@ body {
 .ama-section { padding: 1.5rem 0 4rem; }
 
 .ama-chat {
-  max-width: 560px;
-  background: #FFFFFF;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(26, 35, 50, 0.08);
   border-radius: 16px;
-  padding: 1.75rem 1.5rem 1.5rem;
+  padding: 1.25rem 1.5rem 1.5rem;
   box-shadow: 0 1px 3px rgba(26, 35, 50, 0.05);
+}
+
+.ama-head {
+  display: flex;
+  align-items: center;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid rgba(26, 35, 50, 0.08);
+  margin-bottom: 0.9rem;
+}
+
+.ama-avatar-wrap { position: relative; display: inline-block; }
+
+.ama-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+.ama-avatar-wrap::after {
+  content: '';
+  position: absolute;
+  right: -1px;
+  bottom: -1px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: #4CAF7D;
+  border: 2px solid #FFFFFF;
+}
+
+/* typing indicator */
+.ama-typing {
+  display: none;
+  padding: 0.8rem 1rem;
+}
+
+.ama-typing-on { display: flex; gap: 5px; align-items: center; }
+
+.ama-typing span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #9CA0A8;
+  animation: ama-blink 1.2s infinite;
+}
+
+.ama-typing span:nth-child(2) { animation-delay: 0.2s; }
+.ama-typing span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes ama-blink {
+  0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
+  30% { opacity: 1; transform: translateY(-3px); }
+}
+
+/* bubble arrival */
+.ama-hidden { display: none; }
+
+.ama-pop { animation: ama-pop-in 0.3s ease-out; }
+
+@keyframes ama-pop-in {
+  from { opacity: 0; transform: translateY(8px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 .ama-day {
@@ -726,7 +792,7 @@ body {
 }
 
 .ama-bubble {
-  max-width: 78%;
+  max-width: min(78%, 480px);
   padding: 0.65rem 1rem;
   border-radius: 18px;
   font-size: 14.5px;
@@ -780,6 +846,7 @@ body {
   justify-content: center;
   flex-shrink: 0;
   transition: opacity 0.15s;
+  animation: say-pulse 2.8s ease-out infinite;
 }
 
 .ama-inputrow button:hover { opacity: 0.85; }
